@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>4.3.18.RELEASE</version> <!-- Multiple CVEs -->
+            <version>5.3.38</version> <!-- Multiple CVEs -->
         </dependency>
 
         <!-- Vulnerable Jackson versions -->
