@@ -18,7 +18,7 @@ twisted==17.5.0         # Multiple security vulnerabilities
 celery==4.2.0           # Pickle deserialization vulnerabilities
 redis==2.10.6           # Multiple CVEs
 psycopg2==2.7.3         # SQL injection potential
-mysql-connector-python==8.0.11  # Multiple CVEs
+mysql-connector-python==9.1.0  # Multiple CVEs
 pycrypto==2.6.1         # Deprecated with security issues
 pyopenssl==17.5.0       # Multiple TLS vulnerabilities
 nltk==3.3               # Arbitrary code execution via pickled models
