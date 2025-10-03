@@ -36,12 +36,12 @@ jobs:
           parlay --help
 
       # ---------- Setup SSH ----------
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 34.133.205.61 >> ~/.ssh/known_hosts
+      # - name: Setup SSH
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+      #     chmod 600 ~/.ssh/id_rsa
+      #     ssh-keyscan -H 34.133.205.61 >> ~/.ssh/known_hosts
 
       # ---------- Run Trivy SCA ----------
       - name: Run Trivy SCA (Filesystem Scan)
