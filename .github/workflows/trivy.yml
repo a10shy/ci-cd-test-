@@ -1,10 +1,9 @@
 name: Trivy Security Scan + SBOM Enrichment
 
 on:
-  workflow_run:
-    workflows: ["Semgrep Offline Security Scan"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
