@@ -57,7 +57,7 @@ jobs:
         run: |
           # scp -i ~/.ssh/id_rsa security-reports/${{ steps.sca.outputs.sca_file }} \
           #   pranavanil123@34.133.205.61:/home/pranavanil123/findings/trivy_sca/
-          curl -X POST https://3.7.97.225/api/github-actions/upload/ci-cd-test/Sample-repo/sca -H "Content-Type: application/json" -d @security-reports/${{ steps.sca.outputs.sca_file }}
+          curl -X POST https://3.7.97.225:5000/api/github-actions/upload/ci-cd-test/Sample-repo/sca -H "Content-Type: application/json" -d @security-reports/${{ steps.sca.outputs.sca_file }}
 
       # ---------- Run Trivy SBOM ----------
       - name: Run Trivy SBOM (SPDX-JSON)
@@ -81,4 +81,4 @@ jobs:
         run: |
           # scp -i ~/.ssh/id_rsa security-reports/${{ steps.enrich.outputs.enriched_file }} \
           #   pranavanil123@34.133.205.61:/home/pranavanil123/findings/trivy_SBOM/
-          curl -X POST https://3.7.97.225/api/github-actions/upload/ci-cd-test/Sample-repo/sbom -H "Content-Type: application/json" -d @security-reports/enriched-${{ steps.sbom.outputs.sbom_file }}
+          curl -X POST https://3.7.97.225:5000/api/github-actions/upload/ci-cd-test/Sample-repo/sbom -H "Content-Type: application/json" -d @security-reports/enriched-${{ steps.sbom.outputs.sbom_file }}
