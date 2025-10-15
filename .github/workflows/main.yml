@@ -10,7 +10,7 @@ on:
 
 env:
   PROJECT_NAME: "data-analytics"
-  REPOSITORY_NAME: "janaa"
+  REPOSITORY_NAME: "lala"
   S3_BUCKET: "xsecops"
   S3_PREFIX: "scans"
 
