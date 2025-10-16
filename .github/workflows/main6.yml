@@ -68,7 +68,7 @@ jobs:
           body=$(echo "$response" | sed '$d')
           
           if [ "$http_code" -eq 200 ]; then
-            echo "✅ Dashboard notified successfully"
+            echo "✅ Dashboard notified succes sfully"
             echo "$body" | jq .
           else
             echo "❌ Failed to notify dashboard (HTTP $http_code)"
