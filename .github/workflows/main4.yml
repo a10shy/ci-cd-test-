@@ -1,0 +1,78 @@
+name: Trivy Security Scan with S3 Upload
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 2 AM UTC
+
+env:
+  PROJECT_NAME: "data-analytics"
+  REPOSITORY_NAME: "analytics"
+  S3_BUCKET: "xsecops"
+  S3_PREFIX: "scans"
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'json'
+          output: 'trivy-results.json'
+          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
+      
+      - name: Generate timestamp
+        id: timestamp
+        run: echo "timestamp=$(date -u +%Y-%m-%dT%H-%M-%S)" >> $GITHUB_OUTPUT
+      
+      - name: Upload scan results to S3
+        id: s3-upload
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-south-1
+        run: |
+          S3_KEY="${{ env.S3_PREFIX }}/${{ env.PROJECT_NAME }}/${{ env.REPOSITORY_NAME }}/sca/${{ steps.timestamp.outputs.timestamp }}-trivy-results.json"
+          
+          aws s3 cp trivy-results.json \
+            "s3://${{ env.S3_BUCKET }}/${S3_KEY}" \
+            --region $AWS_REGION
+          
+          echo "s3_key=${S3_KEY}" >> $GITHUB_OUTPUT
+          echo "✅ Uploaded scan results to S3: ${S3_KEY}"
+      
+      - name: Notify dashboard to process scan
+        env:
+          API_URL: ${{ secrets.DASHBOARD_API_URL }}
+        run: |
+          response=$(curl -s -w "\n%{http_code}" -X POST "${API_URL}/api/s3-queue/notify" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "s3Key": "${{ steps.s3-upload.outputs.s3_key }}",
+              "projectName": "${{ env.PROJECT_NAME }}",
+              "repositoryName": "${{ env.REPOSITORY_NAME }}",
+              "scanType": "sca"
+            }')
+          
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          
+          if [ "$http_code" -eq 200 ]; then
+            echo "✅ Dashboard notified successfully"
+            echo "$body" | jq .
+          else
+            echo "❌ Failed to notify dashboard (HTTP $http_code)"
+            echo "$body"
+            exit 1
+          fi
+      
