@@ -51,7 +51,7 @@ jobs:
           echo "s3_key=${S3_KEY}" >> $GITHUB_OUTPUT
           echo "✅ Uploaded scan results to S3: ${S3_KEY}"
       
-      - name: Notify dashboard to processs scan
+      - name: Notify dashboard to process scan
         env:
           API_URL: ${{ secrets.DASHBOARD_API_URL }}
         run: |
