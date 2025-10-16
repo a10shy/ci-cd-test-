@@ -71,7 +71,7 @@ jobs:
             echo "✅ Dashboard notified successfully"
             echo "$body" | jq .
           else
-            echo "❌ Failed to notify dashboard (HTTP $http_code)"
+            echo "❌ Failed too notify dashboard (HTTP $http_code)"
             echo "$body"
             exit 1
           fi
