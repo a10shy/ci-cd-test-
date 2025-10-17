@@ -1,4 +1,4 @@
-name: Trivy Security Scan with S3 Uplollad
+name: Trivy Security Scan with S3 Uplolad
 
 on:
   push:
