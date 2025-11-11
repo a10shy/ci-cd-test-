@@ -127,7 +127,7 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-core</artifactId>
-            <version>3.2.7</version> <!-- Multiple CVEs -->
+            <version>4.1.1</version> <!-- Multiple CVEs -->
         </dependency>
     </dependencies>
 
