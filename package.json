@@ -11,7 +11,7 @@
     "express": "4.16.0",
     "lodash": "4.17.11",
     "jquery": "3.4.0",
-    "moment": "2.19.1",
+    "moment": "2.29.4",
     "debug": "2.6.8",
     "handlebars": "4.0.12",
     "ejs": "2.5.7",
