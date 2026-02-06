@@ -55,18 +55,38 @@ jobs:
         env:
           API_URL: ${{ secrets.DASHBOARD_API_URL }}
         run: |
+          # Build scan metadata JSON
+          SCAN_INFO=$(jq -n \
+            --arg scannedIn "GitHub Actions" \
+            --arg branch "${{ github.ref_name }}" \
+            --arg initiatedBy "${{ github.actor }}" \
+            '{scannedIn: $scannedIn, branch: $branch, scanInitiatedBy: $initiatedBy}')
+
+          # Construct final JSON payload properly using jq
+          PAYLOAD=$(jq -n \
+            --arg s3Key "${{ steps.s3-upload.outputs.s3_key }}" \
+            --arg projectName "${{ env.PROJECT_NAME }}" \
+            --arg repositoryName "${{ env.REPOSITORY_NAME }}" \
+            --arg scanType "sca" \
+            --argjson scanInfo "$SCAN_INFO" \
+            '{
+              s3Key: $s3Key,
+              projectName: $projectName,
+              repositoryName: $repositoryName,
+              scanType: $scanType,
+              scanInfo: $scanInfo
+            }')
+
+          echo "Sending payload:"
+          echo "$PAYLOAD" | jq .
+
           response=$(curl -s -w "\n%{http_code}" -X POST "${API_URL}/api/s3-queue/notify" \
             -H "Content-Type: application/json" \
-            -d '{
-              "s3Key": "${{ steps.s3-upload.outputs.s3_key }}",
-              "projectName": "${{ env.PROJECT_NAME }}",
-              "repositoryName": "${{ env.REPOSITORY_NAME }}",
-              "scanType": "sca"
-            }')
-          
+            -d "$PAYLOAD")
+
           http_code=$(echo "$response" | tail -n1)
           body=$(echo "$response" | sed '$d')
-          
+
           if [ "$http_code" -eq 200 ]; then
             echo "✅ Dashboard notified successfully"
             echo "$body" | jq .
@@ -75,4 +95,4 @@ jobs:
             echo "$body"
             exit 1
           fi
-      
+
