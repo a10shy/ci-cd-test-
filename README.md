@@ -16,7 +16,7 @@ This collection contains intentionally vulnerable applications designed to test 
   - Moment 2.19.1 - ReDoS vulnerability
   - JWT 8.3.0 - Algorithm confusion CVE-2022-23529
   - Request 2.88.0 - Deprecated with security issues
-  - And 15+ more vulnerable dependencies
+  - And 15+ more vulnerable dependencies 
 
 ### 2. Python Vulnerable Application (`vulnerable-python-app/`)
 - **Language:** Python
