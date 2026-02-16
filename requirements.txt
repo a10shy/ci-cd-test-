@@ -1,5 +1,5 @@
 # Vulnerable Python dependencies for Trivy testing
-Django==1.11.0          # Multiple CVEs including SQL injection
+Django==3.2.14          # Multiple CVEs including SQL injection
 Flask==0.12.2            # Multiple security issues
 Jinja2==2.7.2           # Template injection CVE-2019-10906
 Werkzeug==0.11.10       # Multiple CVEs
