@@ -13,7 +13,7 @@ SQLAlchemy==1.2.0       # SQL injection potential
 lxml==4.2.1             # XML external entity (XXE) vulnerabilities
 beautifulsoup4==4.6.0   # XSS vulnerabilities in parsing
 selenium==3.8.0         # Multiple security issues
-tornado==4.5.0          # Multiple CVEs
+tornado==6.5          # Multiple CVEs
 twisted==17.5.0         # Multiple security vulnerabilities
 celery==4.2.0           # Pickle deserialization vulnerabilities
 redis==2.10.6           # Multiple CVEs
