@@ -13,7 +13,7 @@
     "jquery": "3.4.0",
     "moment": "2.19.1",
     "debug": "2.6.8",
-    "handlebars": "4.0.12",
+    "handlebars": "4.7.4",
     "ejs": "2.5.7",
     "serialize-javascript": "1.4.0",
     "axios": "0.18.0",
