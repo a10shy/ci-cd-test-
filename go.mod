@@ -11,7 +11,7 @@ require (
     golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // Multiple CVEs
     golang.org/x/net v0.0.0-20200625001655-4c5254603344 // Multiple CVEs
     gopkg.in/yaml.v2 v2.3.0 // Billion laughs attack
-    github.com/gogo/protobuf v1.3.1 // CVE-2021-3121
+    github.com/gogo/protobuf v1.3.2 // CVE-2021-3121
     github.com/hashicorp/consul/api v1.7.0 // Multiple CVEs
     github.com/docker/docker v17.12.0-ce-rc1.0.20200916142827-bd33bbf0497b+incompatible // Multiple CVEs
     github.com/kubernetes/kubernetes v1.18.0 // Multiple CVEs
