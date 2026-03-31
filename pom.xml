@@ -92,7 +92,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20180130</version> <!-- Denial of service -->
+            <version>20231013</version> <!-- Denial of service -->
         </dependency>
 
         <!-- Vulnerable template engines -->
