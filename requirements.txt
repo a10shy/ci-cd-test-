@@ -3,7 +3,7 @@ Django==1.11.0          # Multiple CVEs including SQL injection
 Flask==0.12.2            # Multiple security issues
 Jinja2==2.7.2           # Template injection CVE-2019-10906
 Werkzeug==0.11.10       # Multiple CVEs
-requests==2.19.1        # CVE-2018-18074
+requests==2.32.4        # CVE-2018-18074
 urllib3==1.24.1         # Multiple CVEs
 Pillow==5.2.0           # Multiple image processing CVEs
 PyYAML==3.12            # CVE-2017-18342 arbitrary code execution
