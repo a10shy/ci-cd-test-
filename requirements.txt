@@ -9,7 +9,7 @@ Pillow==5.2.0           # Multiple image processing CVEs
 PyYAML==3.12            # CVE-2017-18342 arbitrary code execution
 cryptography==2.3      # Multiple cryptographic vulnerabilities
 paramiko==2.4.0         # SSH vulnerabilities
-SQLAlchemy==1.2.0       # SQL injection potential
+SQLAlchemy==1.2.18       # SQL injection potential
 lxml==4.2.1             # XML external entity (XXE) vulnerabilities
 beautifulsoup4==4.6.0   # XSS vulnerabilities in parsing
 selenium==3.8.0         # Multiple security issues
